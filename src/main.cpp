@@ -1,7 +1,12 @@
 #include <memory>
 #include "bn_core.h"
+#include "bn_memory.h"
 
+#include "Definitions.h"
+
+#ifdef LOG_USED_MEMORY
 #include "bn_log.h"
+#endif
 
 #include "scenes/Scene.h"
 #include "scenes/Minigames_selector.h"  
@@ -12,6 +17,10 @@ int main(){
     std::unique_ptr<Scene> act_scene;
     bn::optional<SceneType> next_scene;
     act_scene.reset(new Minigames_selector());
+    
+    #ifdef LOG_USED_MEMORY
+    int frame_counter = 0;
+    #endif
 
     while(true){ 
         if(act_scene){
@@ -27,6 +36,14 @@ int main(){
             }
         }
 
+        #ifdef LOG_USED_MEMORY
+        frame_counter++;
+        if(frame_counter == 60){
+            frame_counter = 0;
+            BN_LOG("Used EWRAM: ", bn::memory::used_alloc_ewram() + bn::memory::used_static_ewram(), "/262144");
+            BN_LOG("Used IWRAM: ", bn::memory::used_stack_iwram() + bn::memory::used_static_iwram(), "/32768");
+        }
+        #endif
         bn::core::update();
     }
 }
