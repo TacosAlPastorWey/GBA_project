@@ -10,6 +10,7 @@
 
 #include "scenes/Scene.h"
 #include "scenes/Minigames_selector.h"  
+#include "scenes/Minigame_construction_1.h"
 
 int main(){
     bn::core::init();
@@ -28,10 +29,18 @@ int main(){
             if(next_scene){
                 switch (*next_scene){
                     /// FIXME: Add a case for each scene and initialize it}
-                    /*case SceneType::MINIGAME_1:{
-                        // act_scene.reset(new Minigame_1());
+                    case SceneType::MINIGAME_CONSTRUCTION_1:{
+                        act_scene.reset(new Minigame_construction_1());
                         break;
-                    }*/
+                    }
+                    case SceneType::MINIGAMES_SELECTOR:{
+                        act_scene.reset(new Minigames_selector());
+                        break;
+                    }
+                    default:{
+                        BN_LOG("Scene not found");
+                        break;
+                    }
                 }
             }
         }

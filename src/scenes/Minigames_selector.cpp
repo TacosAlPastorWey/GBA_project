@@ -1,17 +1,14 @@
 #include "scenes/Minigames_selector.h"
 
 const bn::string_view Minigames_selector::scene_names[SCENE_COUNT] = {
-    "Minijuego 1"
+    "Construction 1"
 };
 
 Minigames_selector::Minigames_selector() : 
-    text_generator(bn::sprite_font(bn::sprite_items::fixed_8x16_font)), 
-    arrow_sprite(bn::sprite_items::arrow.create_sprite(-112, -72)){
+    arrow_sprite(bn::sprite_items::arrow.create_sprite(-112, -72)),
+    text_generator(bn::sprite_font(bn::sprite_items::fixed_8x16_font))
+    {
     text_generator.set_left_alignment();
-}
-
-Minigames_selector::~Minigames_selector(){
-    scene_names_sprites.clear();
 }
 
 bn::optional<SceneType> Minigames_selector::update(){
@@ -47,15 +44,13 @@ bn::optional<SceneType> Minigames_selector::update(){
     }
 
     if(bn::keypad::a_pressed()){
-        /// Switch case 
         int scene_index = pos_arrow + top_scene;
         switch(scene_index){
             case 0:
-                // Initialize the scene 0
-                break;
+                return SceneType::MINIGAME_CONSTRUCTION_1;
+            default:
+                return bn::nullopt;
         }
-
-        return SceneType::MINIGAME_1;
     }
 
     return bn::nullopt;

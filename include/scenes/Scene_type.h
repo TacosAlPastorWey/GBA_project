@@ -3,7 +3,7 @@
 
 enum class SceneType {
     MINIGAMES_SELECTOR,
-    MINIGAME_1
+    MINIGAME_CONSTRUCTION_1
 };
 
 #endif

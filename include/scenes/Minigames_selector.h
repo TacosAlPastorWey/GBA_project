@@ -24,7 +24,7 @@ private:
 
 public:
     Minigames_selector();
-    ~Minigames_selector();
+    ~Minigames_selector() = default;
 
     bn::optional<SceneType> update() final;
 };
