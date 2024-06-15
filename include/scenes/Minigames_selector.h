@@ -19,7 +19,7 @@ private:
     bn::sprite_ptr arrow_sprite;
     bn::sprite_text_generator text_generator;
     
-    static constexpr int SCENE_COUNT = 1;
+    static constexpr int SCENE_COUNT = 2;
     static const bn::string_view scene_names[SCENE_COUNT];
 
 public:

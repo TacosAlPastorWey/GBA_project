@@ -1,7 +1,8 @@
 #include "scenes/Minigames_selector.h"
 
 const bn::string_view Minigames_selector::scene_names[SCENE_COUNT] = {
-    "Construction 1"
+    "Construction 1",
+    "Pizza 2"
 };
 
 Minigames_selector::Minigames_selector() : 
@@ -48,6 +49,8 @@ bn::optional<SceneType> Minigames_selector::update(){
         switch(scene_index){
             case 0:
                 return SceneType::MINIGAME_CONSTRUCTION_1;
+            case 1:
+                return SceneType::MINIGAME_2;
             default:
                 return bn::nullopt;
         }
