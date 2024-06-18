@@ -56,5 +56,9 @@ bn::optional<SceneType> Minigames_selector::update(){
         }
     }
 
+    if(bn::keypad::b_pressed()){
+        return SceneType::HOUSE;
+    }
+
     return bn::nullopt;
 }

@@ -2,6 +2,7 @@
 #include "bn_core.h"
 #include "bn_memory.h"
 #include "bn_random.h"
+#include "bn_backdrop.h"
 
 #include "Definitions.h"
 
@@ -10,6 +11,7 @@
 #endif
 
 #include "scenes/Scene.h"
+#include "scenes/House.h"
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
 #include "scenes/Minigame_2.h"
@@ -17,9 +19,11 @@
 int main(){
     bn::core::init();
 
+    bn::backdrop::set_color(bn::color(0, 0, 31));
+
     std::unique_ptr<Scene> act_scene;
     bn::optional<SceneType> next_scene;
-    act_scene.reset(new Minigames_selector());
+    act_scene.reset(new House());
     
     bn::random rng;
 
@@ -33,6 +37,10 @@ int main(){
             if(next_scene){
                 switch (*next_scene){
                     /// FIXME: Add a case for each scene and initialize it}
+                    case SceneType::HOUSE:{
+                        act_scene.reset(new House());
+                        break;
+                    }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{
                         act_scene.reset(new Minigame_construction_1());
                         break;
