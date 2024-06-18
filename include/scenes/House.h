@@ -5,6 +5,7 @@
 #include "bn_vector.h"
 #include "bn_fixed_rect.h"
 #include "bn_core.h"
+#include "bn_log.h"
 
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_items_character.h"
@@ -26,7 +27,7 @@ class House : public Scene {
         bn::bg_palette_ptr house_palette;
         bn::sprite_text_generator text_generator;
         bn::vector<bn::sprite_ptr, 10> text_sprites;
-        bn::fixed_rect objects_hitbox[7];
+        int objects_map [10][16];
         int prev_object;
         int object;
     public:
