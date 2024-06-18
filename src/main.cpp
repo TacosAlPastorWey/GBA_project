@@ -4,12 +4,16 @@
 #include "bn_random.h"
 #include "bn_backdrop.h"
 
+// Game Systems
 #include "Definitions.h"
+#include "Save_game.h"
 
+// Log
 #ifdef LOG_USED_MEMORY
 #include "bn_log.h"
 #endif
 
+// Minigame Scenes
 #include "scenes/Scene.h"
 #include "scenes/House.h"
 #include "scenes/Minigames_selector.h"  
@@ -19,6 +23,15 @@
 
 int main(){
     bn::core::init();
+
+    Save_game Save;
+
+    // Save.set_debt(5000);
+    // Save.set_money(300);
+
+    Save.load();
+
+    // Save.save();
 
     bn::backdrop::set_color(bn::color(0, 0, 31));
 
