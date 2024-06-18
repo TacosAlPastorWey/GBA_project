@@ -110,6 +110,11 @@ bn::optional<SceneType> House::update() {
                 return SceneType::MINIGAMES_SELECTOR;
             }
             break;
+        case 3:
+            if(bn::keypad::a_pressed()){
+                return SceneType::LEADERBOARD;
+            }
+            break;
         case 7:
             if(bn::keypad::a_pressed()){
                 bn::core::sleep(bn::keypad::key_type::START);

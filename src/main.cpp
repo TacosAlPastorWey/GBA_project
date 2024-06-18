@@ -16,6 +16,7 @@
 // Minigame Scenes
 #include "scenes/Scene.h"
 #include "scenes/House.h"
+#include "scenes/Leaderboard.h"
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
 #include "scenes/Minigame_pizza_1.h"
@@ -53,6 +54,10 @@ int main(){
                     /// FIXME: Add a case for each scene and initialize it}
                     case SceneType::HOUSE:{
                         act_scene.reset(new House());
+                        break;
+                    }
+                    case SceneType::LEADERBOARD:{
+                        act_scene.reset(new Leaderboard(Save));
                         break;
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{
