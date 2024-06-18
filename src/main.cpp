@@ -14,6 +14,7 @@
 #include "scenes/House.h"
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
+#include "scenes/Minigame_pizza_1.h"
 #include "scenes/Minigame_2.h"
 
 int main(){
@@ -49,10 +50,15 @@ int main(){
                         act_scene.reset(new Minigame_2(rng));
                         break;
                     }
+                    case SceneType::MINIGAME_PIZZA_1:{
+                        act_scene.reset(new Minigame_pizza_1());
+                        break;
+                    }
                     case SceneType::MINIGAMES_SELECTOR:{
                         act_scene.reset(new Minigames_selector());
                         break;
                     }
+                    
                     default:{
                         BN_LOG("Scene not found");
                         break;
