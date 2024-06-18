@@ -1,4 +1,5 @@
 {
     "type": "regular_bg",
-    "height": 256
+    "height": 256,
+    "colors_count": 24
 }
