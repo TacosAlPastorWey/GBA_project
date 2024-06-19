@@ -17,6 +17,7 @@
 #include "scenes/Scene.h"
 #include "scenes/House.h"
 #include "scenes/Leaderboard.h"
+#include "scenes/Computer.h"
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
 #include "scenes/Minigame_pizza_1.h"
@@ -58,6 +59,10 @@ int main(){
                     }
                     case SceneType::LEADERBOARD:{
                         act_scene.reset(new Leaderboard(Save));
+                        break;
+                    }
+                    case SceneType::COMPUTER:{
+                        act_scene.reset(new Computer(Save));
                         break;
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{

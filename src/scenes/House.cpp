@@ -100,6 +100,9 @@ bn::optional<SceneType> House::update() {
 
             show_text("Go online");
         }
+        if(bn::keypad::a_pressed()){
+            return SceneType::COMPUTER;
+        }
         break;
     case 6: // Toolbox
         if(prev_object != 6){
