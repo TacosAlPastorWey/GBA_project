@@ -26,25 +26,6 @@ Wardrobe::Wardrobe(Save_game& _save) :
 
 bn::optional<SceneType> Wardrobe::update() {
 
-    if(bn::keypad::left_pressed()) {
-        item_index--;
-        if(item_index <= 0){ 
-            item_index = 0;
-            left_arrow.set_visible(false);
-        }
-        set_index_text();
-        right_arrow.set_visible(true);
-    }
-    if(bn::keypad::right_pressed()) {
-        item_index++;
-        if(item_index >= 31){
-            item_index = 31;
-            right_arrow.set_visible(false);
-        }
-        set_index_text();
-        left_arrow.set_visible(true);
-    }
-
     //Change color of the arrows
     if(bn::keypad::left_held()) {
         left_arrow_palette.set_color(2, bn::color(28,13,1));
@@ -53,11 +34,46 @@ bn::optional<SceneType> Wardrobe::update() {
     }
 
     if(bn::keypad::left_released()) {
+        item_index--;
+        if(item_index <= 0){ 
+            item_index = 0;
+            left_arrow.set_visible(false);
+        }
         left_arrow_palette.set_color(2, bn::color(31,31,31));
         load_curr_item();
+        right_arrow.set_visible(true);
     }else if(bn::keypad::right_released()) {
+        item_index++;
+        if(item_index >= 31){
+            item_index = 31;
+            right_arrow.set_visible(false);
+        }
         right_arrow_palette.set_color(2, bn::color(31,31,31));
         load_curr_item();
+        left_arrow.set_visible(true);
+    }
+
+    if(bn::keypad::a_pressed()){
+        int flags = 0;
+        switch (option_selected){
+        case 0:
+            flags = save.uniforms();
+            break;
+        case 1:
+            flags = save.hats();
+            break;
+        case 2:
+            flags = save.gloves();
+            break;
+        default:
+            break;
+        }
+
+        // Si el objeto no esta bloqueado lo selecciona
+        if(flags & (1 << item_index)) {
+            save.set_selected_stuff(save.selected_stuff() & ~(0x1F << (option_selected * 5)) | (item_index << (option_selected*5)));
+            load_curr_item();
+        }
     }
 
     if(bn::keypad::l_pressed()) {
@@ -93,11 +109,11 @@ bn::optional<SceneType> Wardrobe::update() {
         item_index = 0;
         left_arrow.set_visible(false);
         right_arrow.set_visible(true);
-        set_index_text();
         load_curr_item();
     }
 
     if(bn::keypad::b_pressed()) {
+        save.save();
         return SceneType::HOUSE;
     }
 
@@ -113,19 +129,28 @@ void Wardrobe::set_index_text() {
 
 void Wardrobe::load_curr_item() {
     /// Check if the item is locked
-    int flags = 0;
+    int flags = 0,selected = 0;
     switch (option_selected){
     case 0:
         flags = save.uniforms();
+        selected = save.selected_stuff() & 0x1F;
         break;
     case 1:
         flags = save.hats();
+        selected = (save.selected_stuff() >> 5) & 0x1F;
         break;
     case 2:
         flags = save.gloves();
+        selected = (save.selected_stuff() >> 10) & 0x1F;
         break;
     default:
         break;
+    }
+
+    set_index_text();
+
+    if(selected == item_index) {
+        text_generator.generate(28, -28, "SELECTED", text_sprites);
     }
 
     if((flags & (1 << item_index)) == 0) {

@@ -12,6 +12,7 @@ Save_game :: Save_game() :
     _hats(),
     _gloves(),
     _themes(),
+    _selected_stuff(),
     _minigames_collections()
     {
 }
@@ -41,16 +42,22 @@ void Save_game::load() {
             _highscore_values[i] = 0;
         }
 
-        _uniforms = 0;
-        _hats = 0;
-        _gloves = 0;
-        _themes = 0;
+        _uniforms = 0xF;
+        _hats = 0xF;
+        _gloves = 0xF;
+        _themes = 0xF;
+
+        _selected_stuff = 0;
 
         for(int i = 0; i < 15; i++) {
             _minigames_collections[i] = 0;
         }
 
         save();
+    }
+
+    for(int i = 0; i < 10; i++) {
+        _highscore_names[i][11] = '\0'; // Ensure that the name is null-terminated
     }
 }
 
@@ -123,6 +130,14 @@ int Save_game::themes() {
 
 void Save_game::set_themes(int themes) {
     _themes = themes;
+}
+
+int Save_game::selected_stuff() {
+    return _selected_stuff;
+}
+
+void Save_game::set_selected_stuff(int stuff) {
+    _selected_stuff = stuff;
 }
 
 int Save_game::minigames_collections(int pos) {

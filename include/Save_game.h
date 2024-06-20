@@ -16,6 +16,7 @@ private:
     int _hats;
     int _gloves;
     int _themes;
+    int _selected_stuff; // first 5 bits for uniform, next 5 for hat, next 5 for gloves, next 5 for theme
     int _minigames_collections[15]; // first bit represents if the collection is unlocked, the next bits represent the minigames unlocked in the collection
 public:
     Save_game();
@@ -40,6 +41,8 @@ public:
     void set_gloves(int gloves);
     int themes();
     void set_themes(int themes);
+    int selected_stuff();
+    void set_selected_stuff(int stuff);
     int minigames_collections(int pos);
     void set_minigames_collections(int pos, int value);
 };
