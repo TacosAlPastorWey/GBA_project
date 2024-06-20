@@ -73,6 +73,9 @@ bn::optional<SceneType> House::update() {
 
             show_text("Look outside");
         }
+        if(bn::keypad::a_pressed()){
+            return SceneType::WINDOW;
+        }
         break;
     case 3: // Leaderboard
         if(prev_object != 3){

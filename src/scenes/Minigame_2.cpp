@@ -26,8 +26,6 @@ Minigame_2::Minigame_2(bn::random &_rng) : rng(_rng),
     }
     
     
-    
-    
 bn::optional<SceneType> Minigame_2::update(){
     if (bn::keypad::start_pressed()) {
         return SceneType::MINIGAMES_SELECTOR;

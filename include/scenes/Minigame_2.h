@@ -19,7 +19,6 @@
 #include "bn_sound_items.h"
 
 #include "Scene.h"
-// Color queso: #feff88
 
 class Minigame_2 : public Scene {
     private:
