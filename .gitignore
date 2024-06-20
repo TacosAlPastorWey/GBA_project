@@ -3,3 +3,5 @@
 *.sav
 .vscode/
 build/
+Makefile
+*.aseprite
