@@ -1,5 +1,7 @@
 #include "Save_game.h"
 
+#include "bn_log.h"
+
 Save_game :: Save_game() :
     _label(),
     _debt(),

@@ -19,7 +19,7 @@
 class Leaderboard : public Scene {
 private:
     bn::sprite_text_generator text_generator;
-    bn::vector<bn::sprite_ptr, 30> text_sprites;
+    bn::vector<bn::sprite_ptr, 60> text_sprites;
 public:
     Leaderboard(Save_game &Save);
     ~Leaderboard() = default;

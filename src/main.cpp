@@ -19,6 +19,7 @@
 #include "scenes/Leaderboard.h"
 #include "scenes/Computer.h"
 #include "scenes/Window.h"
+#include "scenes/Wardrobe.h"
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
 #include "scenes/Minigame_pizza_1.h"
@@ -68,6 +69,10 @@ int main(){
                     }
                     case SceneType::WINDOW:{
                         act_scene.reset(new Window());
+                        break;
+                    }
+                    case SceneType::WARDROBE:{
+                        act_scene.reset(new Wardrobe(Save));
                         break;
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{

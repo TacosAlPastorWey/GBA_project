@@ -7,7 +7,7 @@
 class Save_game
 {
 private:
-    char _label[6];
+    char _label[8]; // Note: the size of each atrribute must be mutiples of 4 bytes
     int _debt;
     int _money;
     char _highscore_names[10][12];

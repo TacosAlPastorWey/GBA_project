@@ -95,6 +95,9 @@ bn::optional<SceneType> House::update() {
 
             show_text("Change outfit");
         }
+        if(bn::keypad::a_pressed()){
+            return SceneType::WARDROBE;
+        }
         break;
     case 5: // Computer
         if(prev_object != 5){
