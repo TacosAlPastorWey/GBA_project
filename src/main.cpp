@@ -1,4 +1,4 @@
-#include <memory>
+#include "bn_unique_ptr.h"
 #include "bn_core.h"
 #include "bn_memory.h"
 #include "bn_random.h"
@@ -39,7 +39,7 @@ int main(){
 
     bn::backdrop::set_color(bn::color(0, 0, 31));
 
-    std::unique_ptr<Scene> act_scene;
+    bn::unique_ptr<Scene> act_scene;
     bn::optional<SceneType> next_scene;
     act_scene.reset(new House());
     
