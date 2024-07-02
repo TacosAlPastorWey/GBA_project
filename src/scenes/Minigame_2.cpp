@@ -1,6 +1,6 @@
 #include "scenes/Minigame_2.h"
 
-Minigame_2::Minigame_2(bn::random &_rng) : rng(_rng),
+Minigame_2::Minigame_2(Global_variables& _global) : global(_global),
     pizza_spr(bn::sprite_items::pizza_base.create_sprite(0,0)),
     background(bn::regular_bg_items::bg_pizzeria.create_bg(-8,0)),
     select_spr(bn::sprite_items::ph_border.create_sprite(-96,-24)),
@@ -16,7 +16,7 @@ Minigame_2::Minigame_2(bn::random &_rng) : rng(_rng),
         ingredients_spr.push_back(bn::sprite_items::ingredients.create_sprite(96,24,7));
 
         for(int i = 0; i < 16; i++) {
-            recipe_val.push_back(rng.get_int(8));
+            recipe_val.push_back(global.rng().get_int(8));
             recipe_spr.push_back(bn::sprite_items::ingredients.create_sprite(-100+(32*i), -64, recipe_val[i]));
             if (i > 6) {
                 recipe_spr[i].set_visible(false);

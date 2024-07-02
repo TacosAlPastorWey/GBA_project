@@ -26,7 +26,7 @@
 
 #include "Scene.h"
 #include "Scene_type.h"
-#include "../Save_game.h"
+#include "../Global_variables.h"
 #include "../Definitions.h"
 #include "../Utils.h"
 
@@ -38,7 +38,7 @@ public:
 
 class Jobs_tab : public Tab{
 private:
-    Save_game& save;
+    Global_variables& global;
 
     bn::regular_bg_ptr tab_background;
     bn::bg_palette_ptr tab_palette;
@@ -52,7 +52,7 @@ private:
     static const bn::fixed_point jobs_lines_limits[MINIGAMES_COLLECTIONS];
     bn::vector<bn::sprite_ptr, 64> text_sprites;
 public:
-    Jobs_tab(bn::sprite_text_generator& _text_generator, Save_game& _save);
+    Jobs_tab(bn::sprite_text_generator& _text_generator, Global_variables& _global);
     ~Jobs_tab();
 
     void update(bn::fixed_point mouse_pos) final;
@@ -114,9 +114,9 @@ private:
 
     bn::sprite_text_generator text_generator;
 
-    Save_game &save;
+    Global_variables& global;
 public:
-    Computer(Save_game& _save);
+    Computer(Global_variables& _global);
     ~Computer() = default;
     
     bn::optional<SceneType> update() final;

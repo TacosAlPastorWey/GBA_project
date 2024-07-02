@@ -14,14 +14,14 @@
 
 #include "Scene.h"
 #include "Scene_type.h"
-#include "..\Save_game.h"
+#include "..\Global_variables.h"
 
 class Leaderboard : public Scene {
 private:
     bn::sprite_text_generator text_generator;
     bn::vector<bn::sprite_ptr, 60> text_sprites;
 public:
-    Leaderboard(Save_game &Save);
+    Leaderboard(Global_variables &global);
     ~Leaderboard() = default;
 
     bn::optional<SceneType> update() final;

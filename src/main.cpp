@@ -1,12 +1,11 @@
 #include "bn_unique_ptr.h"
 #include "bn_core.h"
 #include "bn_memory.h"
-#include "bn_random.h"
 #include "bn_backdrop.h"
 
 // Game Systems
 #include "Definitions.h"
-#include "Save_game.h"
+#include "Global_variables.h"
 
 // Log
 #ifdef LOG_USED_MEMORY
@@ -27,23 +26,13 @@
 
 int main(){
     bn::core::init();
-
-    Save_game Save;
-
-    // Save.set_debt(5000);
-    // Save.set_money(300);
-
-    Save.load();
-
-    // Save.save();
-
     bn::backdrop::set_color(bn::color(0, 0, 31));
+
+    Global_variables global;
 
     bn::unique_ptr<Scene> act_scene;
     bn::optional<SceneType> next_scene;
     act_scene.reset(new House());
-    
-    bn::random rng;
 
     #ifdef LOG_USED_MEMORY
     int frame_counter = 0;
@@ -60,11 +49,11 @@ int main(){
                         break;
                     }
                     case SceneType::LEADERBOARD:{
-                        act_scene.reset(new Leaderboard(Save));
+                        act_scene.reset(new Leaderboard(global));
                         break;
                     }
                     case SceneType::COMPUTER:{
-                        act_scene.reset(new Computer(Save));
+                        act_scene.reset(new Computer(global));
                         break;
                     }
                     case SceneType::WINDOW:{
@@ -72,7 +61,7 @@ int main(){
                         break;
                     }
                     case SceneType::WARDROBE:{
-                        act_scene.reset(new Wardrobe(Save));
+                        act_scene.reset(new Wardrobe(global));
                         break;
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{
@@ -80,7 +69,7 @@ int main(){
                         break;
                     }
                     case SceneType::MINIGAME_2:{
-                        act_scene.reset(new Minigame_2(rng));
+                        act_scene.reset(new Minigame_2(global));
                         break;
                     }
                     case SceneType::MINIGAME_PIZZA_1:{
@@ -108,7 +97,8 @@ int main(){
             BN_LOG("Used IWRAM: ", bn::memory::used_stack_iwram() + bn::memory::used_static_iwram(), "/32768");
         }
         #endif
-        rng.update();
+
+        global.rng().update();
         bn::core::update();
     }
 }

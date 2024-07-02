@@ -1,7 +1,7 @@
 #include "scenes/Wardrobe.h"
 
-Wardrobe::Wardrobe(Save_game& _save) : 
-    save(_save), 
+Wardrobe::Wardrobe(Global_variables& _global) : 
+    global(_global),
     background(bn::regular_bg_items::bg_wardrobe.create_bg(-8, 0)),
     bg_palette(background.palette()),
     left_arrow(bn::sprite_items::arrow_wardrobe.create_sprite(10, 24)),
@@ -57,13 +57,13 @@ bn::optional<SceneType> Wardrobe::update() {
         int flags = 0;
         switch (option_selected){
         case 0:
-            flags = save.uniforms();
+            flags = global.save().uniforms();
             break;
         case 1:
-            flags = save.hats();
+            flags = global.save().hats();
             break;
         case 2:
-            flags = save.gloves();
+            flags = global.save().gloves();
             break;
         default:
             break;
@@ -71,7 +71,7 @@ bn::optional<SceneType> Wardrobe::update() {
 
         // Si el objeto no esta bloqueado lo selecciona
         if(flags & (1 << item_index)) {
-            save.set_selected_stuff(save.selected_stuff() & ~(0x1F << (option_selected * 5)) | (item_index << (option_selected*5)));
+            global.save().set_selected_stuff((global.save().selected_stuff() & ~(0x1F << (option_selected * 5))) | (item_index << (option_selected*5)));
             load_curr_item();
         }
     }
@@ -113,7 +113,7 @@ bn::optional<SceneType> Wardrobe::update() {
     }
 
     if(bn::keypad::b_pressed()) {
-        save.save();
+        global.save().save();
         return SceneType::HOUSE;
     }
 
@@ -132,16 +132,16 @@ void Wardrobe::load_curr_item() {
     int flags = 0,selected = 0;
     switch (option_selected){
     case 0:
-        flags = save.uniforms();
-        selected = save.selected_stuff() & 0x1F;
+        flags = global.save().uniforms();
+        selected = global.save().selected_stuff() & 0x1F;
         break;
     case 1:
-        flags = save.hats();
-        selected = (save.selected_stuff() >> 5) & 0x1F;
+        flags = global.save().hats();
+        selected = (global.save().selected_stuff() >> 5) & 0x1F;
         break;
     case 2:
-        flags = save.gloves();
-        selected = (save.selected_stuff() >> 10) & 0x1F;
+        flags = global.save().gloves();
+        selected = (global.save().selected_stuff() >> 10) & 0x1F;
         break;
     default:
         break;

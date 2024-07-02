@@ -5,7 +5,6 @@
 
 #include "bn_keypad.h"
 #include "bn_math.h"
-#include "bn_random.h"
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_animate_actions.h"
 #include "bn_sprite_items_axolotcoin.h"
@@ -18,11 +17,12 @@
 
 #include "bn_sound_items.h"
 
+#include "../Global_variables.h"
 #include "Scene.h"
 
 class Minigame_2 : public Scene {
     private:
-        bn::random &rng;
+        Global_variables& global;
 
         bn::sprite_ptr pizza_spr;
         bn::regular_bg_ptr background;
@@ -39,7 +39,7 @@ class Minigame_2 : public Scene {
             {bn::fixed_point(-96,24), bn::fixed_point(-56,24), bn::fixed_point(56,24), bn::fixed_point(96,24)}
         };
     public:
-        Minigame_2(bn::random &_rng);
+        Minigame_2(Global_variables& _global);
         ~Minigame_2() = default;
 
         bn::optional<SceneType> update() final;

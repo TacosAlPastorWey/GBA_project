@@ -1,18 +1,18 @@
 #include "scenes/Computer.h"
 
-Computer::Computer(Save_game& _save) : 
+Computer::Computer(Global_variables& _global) : 
     computer_background(bn::regular_bg_items::bg_computer.create_bg(-8, 0)),
     computer_palette(computer_background.palette()),
     mouse_arrow(bn::sprite_items::mouse_arrow.create_sprite(0, 0)),
     tab_selected(0),
     text_generator(bn::sprite_font(bn::sprite_items::fixed_8x16_font)),
-    save(_save)
+    global(_global)
     {   
     computer_background.set_priority(1);
     mouse_arrow.set_bg_priority(0);
     mouse_arrow.set_z_order(1);
 
-    tab.reset(new Jobs_tab(text_generator,save));
+    tab.reset(new Jobs_tab(text_generator,global));
 }
 
 bn::optional<SceneType> Computer::update() {
@@ -49,7 +49,7 @@ bn::optional<SceneType> Computer::update() {
                 tab_selected = i;
                 switch (tab_selected) {
                 case 0:
-                    tab.reset(new Jobs_tab(text_generator,save));
+                    tab.reset(new Jobs_tab(text_generator,global));
                     break;
                 case 1:
                     tab.reset(new Casino_tab());
@@ -77,8 +77,8 @@ bn::optional<SceneType> Computer::update() {
 
 // ----- Jobs Tab ----- 
 
-Jobs_tab::Jobs_tab(bn::sprite_text_generator& _text_generator,Save_game& _save) :
-    save(_save),
+Jobs_tab::Jobs_tab(bn::sprite_text_generator& _text_generator,Global_variables& _global) :
+    global(_global),
     tab_background(bn::regular_bg_items::bg_computer_2.create_bg(8, 78)),
     tab_palette(tab_background.palette()),
     text_generator(_text_generator),
@@ -94,7 +94,7 @@ Jobs_tab::Jobs_tab(bn::sprite_text_generator& _text_generator,Save_game& _save) 
     text_generator.set_left_alignment();
 
     for(int i = 0; i < MINIGAMES_COLLECTIONS; i++) {
-        if(save.minigames_collections(i) & 1)
+        if(global.save().minigames_collections(i) & 1)
             jobs_icons.push_back(bn::sprite_items::jobs_icons.create_sprite(-80, -3+(32*i),i+1));
         else
             jobs_icons.push_back(bn::sprite_items::jobs_icons.create_sprite(-80, -3+(32*i),0));
@@ -174,11 +174,11 @@ void Jobs_tab::update_jobs_info(bn::fixed scroll) {
 
     for(int i = 0; i < MINIGAMES_COLLECTIONS; i++) {
         if(scroll >= jobs_lines_limits[i].x() || scroll <= jobs_lines_limits[i].y()){
-            if(save.minigames_collections(i) & 1){
+            if(global.save().minigames_collections(i) & 1){
                 text_generator.generate(-50, -scroll + (32*i) -12, Definitions::COLLECTIONS_NAMES[i], text_sprites);
                 bn::string<10> count;
                 bn::ostringstream count_stream(count);
-                count_stream << Utils::count_set_bits(save.minigames_collections(i)) << "/30";
+                count_stream << Utils::count_set_bits(global.save().minigames_collections(i)) << "/30";
                 text_generator.generate(-40, -scroll +  (32*i) + 4, count, text_sprites);
             }else{
                 text_generator.generate(-50, -scroll + (32*i) -12, "??????????", text_sprites);

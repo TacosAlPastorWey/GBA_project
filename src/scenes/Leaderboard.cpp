@@ -1,6 +1,6 @@
 #include "scenes/Leaderboard.h"
 
-Leaderboard::Leaderboard (Save_game &Save) :
+Leaderboard::Leaderboard (Global_variables &global) :
     text_generator(bn::sprite_font(bn::sprite_items::fixed_8x16_font))
     {
     text_generator.set_center_alignment();
@@ -9,8 +9,8 @@ Leaderboard::Leaderboard (Save_game &Save) :
     for (int i = 0; i < 10; i++) {
         bn::string<20> str;
         bn::ostringstream val(str);
-        val.append(Save.highscore_values(i));
-        text_generator.generate(-90, -40+(12*i), Save.highscore_names(i), text_sprites);
+        val.append(global.save().highscore_values(i));
+        text_generator.generate(-90, -40+(12*i), global.save().highscore_names(i), text_sprites);
         text_generator.generate(10, -40+(12*i), str, text_sprites);
     }
 }

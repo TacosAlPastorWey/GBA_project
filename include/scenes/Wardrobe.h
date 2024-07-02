@@ -20,11 +20,11 @@
 #include "bn_regular_bg_items_bg_wardrobe.h"
 
 #include "Scene.h"
-#include "../Save_game.h"
+#include "../Global_variables.h"
 
 class Wardrobe : public Scene {
     private:
-        Save_game& save;
+        Global_variables& global;
         bn::regular_bg_ptr background;
         bn::bg_palette_ptr bg_palette;
 
@@ -44,7 +44,7 @@ class Wardrobe : public Scene {
         int prev_item_index;
         int item_index;
     public:
-        Wardrobe(Save_game& _save);
+        Wardrobe(Global_variables& _global);
         ~Wardrobe() = default;
         
         bn::optional<SceneType> update() final;
