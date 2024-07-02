@@ -6,11 +6,17 @@ const bn::string_view Minigames_selector::scene_names[SCENE_COUNT] = {
     "Pizza 2"
 };
 
-Minigames_selector::Minigames_selector() : 
+Minigames_selector::Minigames_selector(Global_variables& _global) : 
     arrow_sprite(bn::sprite_items::arrow.create_sprite(-112, -72)),
-    text_generator(bn::sprite_font(bn::sprite_items::fixed_8x16_font))
+    text_generator(bn::sprite_font(bn::sprite_items::fixed_8x16_font)),
+    global(_global)
     {
     text_generator.set_left_alignment();
+
+    text_generator.generate(35,-72,"Difficulty", labels);
+    text_generator.generate(55,-56,bn::to_string<8,int>(global.game_difficulty()), difficulty_number);
+    text_generator.generate(35,-40,"Money", labels);
+    text_generator.generate(55,-24,bn::to_string<8,int>(global.game_money()), money_number);
 }
 
 bn::optional<SceneType> Minigames_selector::update(){
@@ -35,6 +41,23 @@ bn::optional<SceneType> Minigames_selector::update(){
 
         update_scene_list = true;
     }   
+
+    // Change the difficulty
+    if(bn::keypad::l_pressed()){
+        global.set_game_difficulty(global.game_difficulty() - 1);
+        if(global.game_difficulty() < 1) global.set_game_difficulty(1);
+
+        difficulty_number.clear();
+        text_generator.generate(55,-56,bn::to_string<8,int>(global.game_difficulty()), difficulty_number);
+    }
+
+    if(bn::keypad::r_pressed()){
+        global.set_game_difficulty(global.game_difficulty() + 1);
+        if(global.game_difficulty() > 5) global.set_game_difficulty(5);
+
+        difficulty_number.clear();
+        text_generator.generate(55,-56,bn::to_string<8,int>(global.game_difficulty()), difficulty_number);
+    }
 
     if(update_scene_list){
         scene_names_sprites.clear();

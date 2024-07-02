@@ -77,7 +77,7 @@ int main(){
                         break;
                     }
                     case SceneType::MINIGAMES_SELECTOR:{
-                        act_scene.reset(new Minigames_selector());
+                        act_scene.reset(new Minigames_selector(global));
                         break;
                     }
                     
