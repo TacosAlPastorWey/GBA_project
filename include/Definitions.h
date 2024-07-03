@@ -2,6 +2,7 @@
 #define DEFINITIONS_H
 
 #define LOG_USED_MEMORY 1
+#define MINIGAMES_TEST
 
 #define MINIGAMES_COLLECTIONS 15
 

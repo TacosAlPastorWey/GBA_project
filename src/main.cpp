@@ -65,7 +65,7 @@ int main(){
                         break;
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{
-                        act_scene.reset(new Minigame_construction_1());
+                        act_scene.reset(new Minigame_construction_1(global));
                         break;
                     }
                     case SceneType::MINIGAME_2:{
