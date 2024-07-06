@@ -50,16 +50,13 @@ private:
 
     bn::vector<bn::sprite_ptr, MINIGAMES_COLLECTIONS> jobs_icons;
     static const bn::fixed_point jobs_lines_limits[MINIGAMES_COLLECTIONS];
-    bn::vector<bn::sprite_ptr, 64> text_sprites;
+    bn::vector<bn::sprite_ptr,4> jobs_info_name[MINIGAMES_COLLECTIONS];
+    bn::vector<bn::sprite_ptr,2> jobs_info_number[MINIGAMES_COLLECTIONS];
 public:
     Jobs_tab(bn::sprite_text_generator& _text_generator, Global_variables& _global);
     ~Jobs_tab();
 
     void update(bn::fixed_point mouse_pos) final;
-
-private:
-
-    void update_jobs_info(bn::fixed scroll);
 };
 
 class Casino_tab : public Tab{

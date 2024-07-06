@@ -24,6 +24,11 @@
 #include "scenes/Minigame_pizza_1.h"
 #include "scenes/Minigame_2.h"
 
+#ifdef SHOW_CPU_USAGE
+#include "bn_vector.h"
+#include "bn_sprite_text_generator.h"
+#endif
+
 int main(){
     bn::core::init();
     bn::backdrop::set_color(bn::color(0, 0, 31));
@@ -36,6 +41,10 @@ int main(){
 
     #ifdef LOG_USED_MEMORY
     int frame_counter = 0;
+    #endif
+
+    #ifdef SHOW_CPU_USAGE
+    bn::vector<bn::sprite_ptr, 5> cpu_usage_spr;
     #endif
 
     while(true){ 
@@ -96,6 +105,11 @@ int main(){
             BN_LOG("Used EWRAM: ", bn::memory::used_alloc_ewram() + bn::memory::used_static_ewram(), "/262144");
             BN_LOG("Used IWRAM: ", bn::memory::used_stack_iwram() + bn::memory::used_static_iwram(), "/32768");
         }
+        #endif
+
+        #ifdef SHOW_CPU_USAGE
+        cpu_usage_spr.clear();
+        global.text_gen_var_8x8().generate(-80, 70, "CPU:"+ bn::to_string<8,int>(int(bn::core::last_cpu_usage()*100)) +"%", cpu_usage_spr);
         #endif
 
         global.rng().update();

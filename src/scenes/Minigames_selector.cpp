@@ -60,6 +60,7 @@ bn::optional<SceneType> Minigames_selector::update(){
     }
 
     if(update_scene_list){
+        update_scene_list = false;
         scene_names_sprites.clear();
         for(int i = 0; i < 10 && i+top_scene < SCENE_COUNT; i++){
             text_generator.generate(-100,i*16-72,scene_names[i + top_scene], scene_names_sprites);

@@ -100,7 +100,17 @@ Jobs_tab::Jobs_tab(bn::sprite_text_generator& _text_generator,Global_variables& 
             jobs_icons.push_back(bn::sprite_items::jobs_icons.create_sprite(-80, -3+(32*i),0));
     }
 
-    update_jobs_info(0);
+    for(int i = 0; i < MINIGAMES_COLLECTIONS; i++) {
+        if(global.save().minigames_collections(i) & 1){
+                text_generator.generate(-50,(32*i) -12, Definitions::COLLECTIONS_NAMES[i], jobs_info_name[i]);
+                bn::string<8> count;
+                bn::ostringstream count_stream(count);
+                count_stream << Utils::count_set_bits(global.save().minigames_collections(i)) << "/30";
+                text_generator.generate(-40, (32*i) + 4, count, jobs_info_number[i]);
+        }else{
+                text_generator.generate(-50, (32*i) -12, "??????????", jobs_info_name[i]);
+        }
+    }
 }
 
 const bn::fixed_point Jobs_tab::jobs_lines_limits[MINIGAMES_COLLECTIONS] = {
@@ -165,23 +175,13 @@ void Jobs_tab::update(bn::fixed_point mouse_pos) {
             jobs_icons[i].set_y(-3 + (32*i) - scroll);
         }
 
-        update_jobs_info(scroll);
-    }
-}
+        for(int i = 0; i < MINIGAMES_COLLECTIONS; i++) {
+            for(int j = 0; j < jobs_info_name[i].size(); j++) {
+                jobs_info_name[i][j].set_y(-scroll + (32*i) -12);
+            }
 
-void Jobs_tab::update_jobs_info(bn::fixed scroll) {
-    text_sprites.clear();
-
-    for(int i = 0; i < MINIGAMES_COLLECTIONS; i++) {
-        if(scroll >= jobs_lines_limits[i].x() || scroll <= jobs_lines_limits[i].y()){
-            if(global.save().minigames_collections(i) & 1){
-                text_generator.generate(-50, -scroll + (32*i) -12, Definitions::COLLECTIONS_NAMES[i], text_sprites);
-                bn::string<10> count;
-                bn::ostringstream count_stream(count);
-                count_stream << Utils::count_set_bits(global.save().minigames_collections(i)) << "/30";
-                text_generator.generate(-40, -scroll +  (32*i) + 4, count, text_sprites);
-            }else{
-                text_generator.generate(-50, -scroll + (32*i) -12, "??????????", text_sprites);
+            for(int j = 0; j < jobs_info_number[i].size(); j++) {
+                jobs_info_number[i][j].set_y(-scroll + (32*i) + 4);
             }
         }
     }
