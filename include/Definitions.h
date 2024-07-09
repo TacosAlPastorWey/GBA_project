@@ -27,4 +27,7 @@ namespace Definitions{
     };
 }
 
+#define TILE_H_FLIP 0x400
+#define TILE_V_FLIP 0x800
+
 #endif

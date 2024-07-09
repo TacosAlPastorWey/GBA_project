@@ -21,6 +21,7 @@
 #include "scenes/Wardrobe.h"
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
+#include "scenes/Minigame_construction_2.h"
 #include "scenes/Minigame_pizza_1.h"
 #include "scenes/Minigame_2.h"
 
@@ -75,6 +76,10 @@ int main(){
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_1:{
                         act_scene.reset(new Minigame_construction_1(global));
+                        break;
+                    }
+                    case SceneType::MINIGAME_CONSTRUCTION_2:{
+                        act_scene.reset(new Minigame_construction_2(global));
                         break;
                     }
                     case SceneType::MINIGAME_2:{
