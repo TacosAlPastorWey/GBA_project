@@ -2,6 +2,8 @@
 #include "bn_core.h"
 #include "bn_memory.h"
 #include "bn_backdrop.h"
+#include "bn_dmg_music_items_wheretheheartis.h"
+#include "bn_dmg_music.h"
 
 // Game Systems
 #include "Definitions.h"
@@ -39,6 +41,7 @@ int main(){
     bn::unique_ptr<Scene> act_scene;
     bn::optional<SceneType> next_scene;
     act_scene.reset(new House());
+    bn::dmg_music_items::wheretheheartis.play();
 
     #ifdef LOG_USED_MEMORY
     int frame_counter = 0;
@@ -56,6 +59,9 @@ int main(){
                     /// FIXME: Add a case for each scene and initialize it}
                     case SceneType::HOUSE:{
                         act_scene.reset(new House());
+                        if(!bn::dmg_music::playing_item()){
+                            bn::dmg_music_items::wheretheheartis.play();
+                            }
                         break;
                     }
                     case SceneType::LEADERBOARD:{
@@ -91,6 +97,7 @@ int main(){
                         break;
                     }
                     case SceneType::MINIGAMES_SELECTOR:{
+                        bn::dmg_music::stop();
                         act_scene.reset(new Minigames_selector(global));
                         break;
                     }
