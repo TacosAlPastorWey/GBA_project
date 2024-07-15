@@ -24,6 +24,7 @@
 #include "scenes/Minigames_selector.h"  
 #include "scenes/Minigame_construction_1.h"
 #include "scenes/Minigame_construction_2.h"
+#include "scenes/Minigame_construction_3.h"
 #include "scenes/Minigame_pizza_1.h"
 #include "scenes/Minigame_2.h"
 
@@ -40,7 +41,7 @@ int main(){
 
     bn::unique_ptr<Scene> act_scene;
     bn::optional<SceneType> next_scene;
-    act_scene.reset(new House());
+    act_scene.reset(new Minigames_selector(global));
     bn::dmg_music_items::wheretheheartis.play();
 
     #ifdef LOG_USED_MEMORY
@@ -86,6 +87,10 @@ int main(){
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_2:{
                         act_scene.reset(new Minigame_construction_2(global));
+                        break;
+                    }
+                    case SceneType::MINIGAME_CONSTRUCTION_3:{
+                        act_scene.reset(new Minigame_construction_3(global));
                         break;
                     }
                     case SceneType::MINIGAME_2:{
