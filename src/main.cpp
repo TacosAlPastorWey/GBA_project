@@ -39,9 +39,8 @@ int main(){
 
     Global_variables global;
 
-    bn::unique_ptr<Scene> act_scene;
+    bn::unique_ptr<Scene> act_scene(bn::make_unique<House>());
     bn::optional<SceneType> next_scene;
-    act_scene.reset(new Minigames_selector(global));
     bn::dmg_music_items::wheretheheartis.play();
 
     #ifdef LOG_USED_MEMORY
