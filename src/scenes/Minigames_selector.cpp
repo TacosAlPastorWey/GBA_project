@@ -4,6 +4,7 @@ const bn::string_view Minigames_selector::scene_names[SCENE_COUNT] = {
     "Construction 1",
     "Construction 2",
     "Construction 3",
+    "Construction 4",
     "Pizza 1",
     "Pizza 2"
 };
@@ -81,8 +82,10 @@ bn::optional<SceneType> Minigames_selector::update(){
             case 2:
                 return SceneType::MINIGAME_CONSTRUCTION_3;
             case 3:
-                return SceneType::MINIGAME_PIZZA_1;
+                return SceneType::MINIGAME_CONSTRUCTION_4;
             case 4:
+                return SceneType::MINIGAME_PIZZA_1;
+            case 5:
                 return SceneType::MINIGAME_2;
             default:
                 return bn::nullopt;
