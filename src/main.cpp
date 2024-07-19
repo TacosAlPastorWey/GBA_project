@@ -26,6 +26,7 @@
 #include "scenes/Minigame_construction_2.h"
 #include "scenes/Minigame_construction_3.h"
 #include "scenes/Minigame_construction_4.h"
+#include "scenes/Minigame_construction_5.h"
 #include "scenes/Minigame_pizza_1.h"
 #include "scenes/Minigame_2.h"
 
@@ -95,6 +96,10 @@ int main(){
                     }
                     case SceneType::MINIGAME_CONSTRUCTION_4:{
                         act_scene.reset(new Minigame_construction_4(global));
+                        break;
+                    }
+                    case SceneType::MINIGAME_CONSTRUCTION_5:{
+                        act_scene.reset(new Minigame_construction_5(global));
                         break;
                     }
                     case SceneType::MINIGAME_2:{
