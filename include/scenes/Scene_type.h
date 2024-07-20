@@ -14,7 +14,8 @@ enum class SceneType {
     MINIGAME_CONSTRUCTION_4,
     MINIGAME_CONSTRUCTION_5,
     MINIGAME_PIZZA_1,
-    MINIGAME_2
+    MINIGAME_2,
+    MINIGAME_BAR_1,
 };
 
 #endif

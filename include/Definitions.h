@@ -9,20 +9,20 @@
 
 namespace Definitions{
     const char COLLECTIONS_NAMES[MINIGAMES_COLLECTIONS][20] = {
-        "Construction",
-        "Pizzeria",
+        "Construction", // -> This
+        "Pizzeria",  // -> This
         "Fishing",
         "Casino",
-        "Plumber",
+        "Plumber",  // Had obe minigame on construction
         "WEB Designer",
         "Miner",
-        "Gardener",
+        "Gardener",  // -> This /combine with pool cleaner maybe
         "Electrician",
-        "Mechanic",
+        "Mechanic", // -> This
         "Painter",
         "Chef",
         "Courier",
-        "Photographer",
+        "Photographer", 
         "Musician"
     };
 }

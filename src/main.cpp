@@ -29,6 +29,7 @@
 #include "scenes/Minigame_construction_5.h"
 #include "scenes/Minigame_pizza_1.h"
 #include "scenes/Minigame_2.h"
+#include "scenes/Minigame_bar_1.h"
 
 #ifdef SHOW_CPU_USAGE
 #include "bn_vector.h"
@@ -108,6 +109,10 @@ int main(){
                     }
                     case SceneType::MINIGAME_PIZZA_1:{
                         act_scene.reset(new Minigame_pizza_1());
+                        break;
+                    }
+                    case SceneType::MINIGAME_BAR_1:{
+                        act_scene.reset(new Minigame_bar_1(global));
                         break;
                     }
                     case SceneType::MINIGAMES_SELECTOR:{
