@@ -26,7 +26,7 @@ private:
 
     Global_variables& global;
     
-    static constexpr int SCENE_COUNT = 8;
+    static constexpr int SCENE_COUNT = 9;
     static const bn::string_view scene_names[SCENE_COUNT];
 
 public:

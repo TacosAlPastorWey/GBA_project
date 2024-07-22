@@ -16,6 +16,7 @@ enum class SceneType {
     MINIGAME_PIZZA_1,
     MINIGAME_2,
     MINIGAME_BAR_1,
+    MINIGAME_COFFEE_1
 };
 
 #endif
